@@ -1,104 +1,243 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新建游戏记录 | 后台管理</title>
+    <title>新建游戏记录 | Galgame管理后台</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        /* 后台专用样式 */
+        :root {
+            --admin-primary: #8a4fff;
+            --admin-secondary: #ff6b9d;
+            --admin-dark: #1a1a2e;
+            --admin-light: #f0f4ff;
+        }
+    </style>
 </head>
 <body class="admin-page">
+    <!-- 全屏背景 -->
+    <div class="admin-bg" style="background-image: url('../images/admin-bg.jpg')"></div>
+    
+    <!-- 毛玻璃遮罩 -->
+    <div class="admin-overlay"></div>
+    
     <div class="admin-container">
-        <!-- 后台侧边栏 -->
+        <!-- 侧边导航 -->
         <aside class="admin-sidebar">
-            <div class="admin-logo">Galgame管理后台</div>
+            <div class="admin-logo">
+                <img src="../images/logo-icon.png" alt="Logo">
+                <span>Galgame日记</span>
+            </div>
+            
             <nav class="admin-nav">
                 <ul>
-                    <li><a href="index.html">仪表盘</a></li>
-                    <li><a href="new-post.html" class="active">新建记录</a></li>
-                    <li><a href="#">管理文章</a></li>
-                    <li><a href="#">媒体库</a></li>
-                    <li><a href="#">用户管理</a></li>
-                    <li><a href="#">网站设置</a></li>
-                    <li><a href="../index.html">返回网站</a></li>
+                    <li>
+                        <a href="index.html">
+                            <i class="icon-dashboard"></i>
+                            <span>仪表盘</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="new-post.html">
+                            <i class="icon-new"></i>
+                            <span>新建记录</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-posts"></i>
+                            <span>文章管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-media"></i>
+                            <span>媒体库</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-settings"></i>
+                            <span>系统设置</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
+            
+            <div class="admin-footer">
+                <a href="../index.html" class="back-to-site">
+                    <i class="icon-home"></i>
+                    返回网站
+                </a>
+                <div class="user-info">
+                    <img src="../images/avatar.jpg" alt="用户头像">
+                    <span>管理员</span>
+                </div>
+            </div>
         </aside>
         
         <!-- 主内容区 -->
         <main class="admin-main">
             <header class="admin-header">
-                <h1>新建游戏记录</h1>
+                <h1>
+                    <i class="icon-new"></i>
+                    新建游戏记录
+                </h1>
+                
                 <div class="admin-actions">
-                    <button class="btn btn-save">保存草稿</button>
-                    <button class="btn btn-publish">发布</button>
+                    <button class="btn btn-outline">
+                        <i class="icon-eye"></i>
+                        预览
+                    </button>
+                    <button class="btn btn-save">
+                        <i class="icon-save"></i>
+                        保存草稿
+                    </button>
+                    <button class="btn btn-publish">
+                        <i class="icon-publish"></i>
+                        发布
+                    </button>
                 </div>
             </header>
             
             <div class="admin-content">
-                <form id="new-post-form">
-                    <div class="form-group">
-                        <label for="post-title">游戏标题</label>
-                        <input type="text" id="post-title" placeholder="输入游戏名称" required>
+                <form id="new-post-form" class="glass-card">
+                    <div class="form-header">
+                        <h2>游戏基本信息</h2>
+                        <p>填写游戏的基本信息和分类</p>
                     </div>
                     
-                    <div class="form-row">
+                    <div class="form-grid">
                         <div class="form-group">
-                            <label for="post-developer">开发商</label>
+                            <label for="post-title">
+                                <i class="icon-title"></i>
+                                游戏标题 *
+                            </label>
+                            <input type="text" id="post-title" placeholder="输入游戏名称" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-developer">
+                                <i class="icon-company"></i>
+                                开发商
+                            </label>
                             <input type="text" id="post-developer" placeholder="输入开发商名称">
                         </div>
                         
                         <div class="form-group">
-                            <label for="post-date">游玩日期</label>
+                            <label for="post-date">
+                                <i class="icon-calendar"></i>
+                                游玩日期 *
+                            </label>
                             <input type="date" id="post-date" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="post-rating">评分</label>
-                            <select id="post-rating">
-                                <option value="5">★★★★★</option>
-                                <option value="4.5">★★★★☆</option>
-                                <option value="4">★★★★</option>
-                                <option value="3.5">★★★☆</option>
-                                <option value="3">★★★</option>
-                                <option value="2">★★</option>
-                                <option value="1">★</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="post-excerpt">内容摘要</label>
-                        <textarea id="post-excerpt" rows="3" placeholder="简短的摘要，将在首页显示"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="post-content">详细内容</label>
-                        <textarea id="post-content" rows="12" placeholder="输入你的游戏感想..." required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>上传封面图</label>
-                        <div class="upload-area" id="upload-cover">
-                            <span>拖放图片或点击上传</span>
-                            <input type="file" accept="image/*" id="cover-upload">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>游戏标签</label>
-                        <div class="tags-container">
-                            <input type="text" id="new-tag" placeholder="输入标签后按回车">
-                            <div class="tags-list">
-                                <span class="tag">泣系 <button type="button">&times;</button></span>
-                                <span class="tag">校园 <button type="button">&times;</button></span>
+                            <label for="post-rating">
+                                <i class="icon-star"></i>
+                                评分
+                            </label>
+                            <div class="rating-stars">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star active" data-value="5">★</span>
                             </div>
                         </div>
                     </div>
                     
+                    <div class="form-group">
+                        <label for="post-excerpt">
+                            <i class="icon-quote"></i>
+                            内容摘要
+                        </label>
+                        <textarea id="post-excerpt" rows="3" placeholder="简短的摘要，将在首页显示"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-content">
+                            <i class="icon-edit"></i>
+                            详细内容 *
+                        </label>
+                        <div class="editor-container">
+                            <textarea id="post-content" rows="12" placeholder="输入你的游戏感想..." required></textarea>
+                            <div class="editor-toolbar">
+                                <button type="button" class="tool-btn" title="加粗"><i>B</i></button>
+                                <button type="button" class="tool-btn" title="斜体"><i>I</i></button>
+                                <button type="button" class="tool-btn" title="引用">❝</button>
+                                <button type="button" class="tool-btn" title="插入图片"><i class="icon-image"></i></button>
+                                <button type="button" class="tool-btn" title="角色对话"><i class="icon-dialogue"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="icon-image"></i> 游戏封面与截图</h3>
+                        
+                        <div class="upload-area" id="upload-cover">
+                            <div class="upload-preview">
+                                <img id="cover-preview" src="" alt="封面预览">
+                                <div class="upload-placeholder">
+                                    <i class="icon-upload"></i>
+                                    <p>拖放封面图或点击上传</p>
+                                    <p class="hint">建议尺寸：600×800px</p>
+                                </div>
+                            </div>
+                            <input type="file" accept="image/*" id="cover-upload">
+                        </div>
+                        
+                        <div class="screenshots-grid">
+                            <div class="screenshot-item add-screenshot">
+                                <i class="icon-plus"></i>
+                                <span>添加截图</span>
+                                <input type="file" multiple accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="icon-tag"></i> 游戏标签与分类</h3>
+                        
+                        <div class="tags-container">
+                            <div class="popular-tags">
+                                <span>常用标签：</span>
+                                <button type="button" class="tag-btn">泣系</button>
+                                <button type="button" class="tag-btn">校园</button>
+                                <button type="button" class="tag-btn">悬疑</button>
+                                <button type="button" class="tag-btn">治愈</button>
+                                <button type="button" class="tag-btn">奇幻</button>
+                            </div>
+                            
+                            <div class="tags-input">
+                                <input type="text" id="new-tag" placeholder="输入标签后按回车">
+                                <div class="tags-list">
+                                    <span class="tag">Key社 <button type="button">&times;</button></span>
+                                    <span class="tag">全年龄 <button type="button">&times;</button></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="category-select">
+                            <label><input type="checkbox" checked> 剧情向</label>
+                            <label><input type="checkbox"> 恋爱</label>
+                            <label><input type="checkbox"> 悬疑</label>
+                            <label><input type="checkbox"> 奇幻</label>
+                            <label><input type="checkbox"> 治愈</label>
+                        </div>
+                    </div>
+                    
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">保存记录</button>
-                        <button type="button" class="btn btn-secondary">预览</button>
+                        <button type="reset" class="btn btn-outline">
+                            <i class="icon-reset"></i>
+                            重置
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="icon-save"></i>
+                            保存记录
+                        </button>
                     </div>
                 </form>
             </div>
@@ -106,5 +245,40 @@
     </div>
     
     <script src="../js/admin.js"></script>
+    <script>
+        // 星级评分功能
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                const value = parseInt(this.dataset.value);
+                const stars = this.parentElement.querySelectorAll('.star');
+                
+                stars.forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // 封面图片预览
+        const coverUpload = document.getElementById('cover-upload');
+        const coverPreview = document.getElementById('cover-preview');
+        
+        coverUpload.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    coverPreview.src = event.target.result;
+                    coverPreview.style.display = 'block';
+                    document.querySelector('.upload-placeholder').style.display = 'none';
+                }
+                
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+    </script>
 </body>
 </html>
