@@ -1,0 +1,110 @@
+ <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新建游戏记录 | 后台管理</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-page">
+    <div class="admin-container">
+        <!-- 后台侧边栏 -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">Galgame管理后台</div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="index.html">仪表盘</a></li>
+                    <li><a href="new-post.html" class="active">新建记录</a></li>
+                    <li><a href="#">管理文章</a></li>
+                    <li><a href="#">媒体库</a></li>
+                    <li><a href="#">用户管理</a></li>
+                    <li><a href="#">网站设置</a></li>
+                    <li><a href="../index.html">返回网站</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>新建游戏记录</h1>
+                <div class="admin-actions">
+                    <button class="btn btn-save">保存草稿</button>
+                    <button class="btn btn-publish">发布</button>
+                </div>
+            </header>
+            
+            <div class="admin-content">
+                <form id="new-post-form">
+                    <div class="form-group">
+                        <label for="post-title">游戏标题</label>
+                        <input type="text" id="post-title" placeholder="输入游戏名称" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="post-developer">开发商</label>
+                            <input type="text" id="post-developer" placeholder="输入开发商名称">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-date">游玩日期</label>
+                            <input type="date" id="post-date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-rating">评分</label>
+                            <select id="post-rating">
+                                <option value="5">★★★★★</option>
+                                <option value="4.5">★★★★☆</option>
+                                <option value="4">★★★★</option>
+                                <option value="3.5">★★★☆</option>
+                                <option value="3">★★★</option>
+                                <option value="2">★★</option>
+                                <option value="1">★</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-excerpt">内容摘要</label>
+                        <textarea id="post-excerpt" rows="3" placeholder="简短的摘要，将在首页显示"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-content">详细内容</label>
+                        <textarea id="post-content" rows="12" placeholder="输入你的游戏感想..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>上传封面图</label>
+                        <div class="upload-area" id="upload-cover">
+                            <span>拖放图片或点击上传</span>
+                            <input type="file" accept="image/*" id="cover-upload">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>游戏标签</label>
+                        <div class="tags-container">
+                            <input type="text" id="new-tag" placeholder="输入标签后按回车">
+                            <div class="tags-list">
+                                <span class="tag">泣系 <button type="button">&times;</button></span>
+                                <span class="tag">校园 <button type="button">&times;</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存记录</button>
+                        <button type="button" class="btn btn-secondary">预览</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/admin.js"></script>
+</body>
+</html>
