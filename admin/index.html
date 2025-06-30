@@ -121,7 +121,17 @@
         }
     </style>
 </head>
+<!-- 在</body>前添加 -->
+<script>
+    // 侧边栏切换
+    document.querySelector('.admin-sidebar-toggle').addEventListener('click', function() {
+        document.querySelector('.admin-sidebar').classList.toggle('active');
+    });
+</script>
 <body class="admin-page">
+<div class="admin-sidebar-toggle">
+    <i class="fas fa-bars"></i>
+</div>
     <!-- 全屏背景 -->
     <div class="admin-bg" style="background-image: url('../images/admin-bg.jpg')"></div>
     

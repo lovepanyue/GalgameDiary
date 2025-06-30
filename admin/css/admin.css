@@ -1,3 +1,9 @@
+<!-- 确保路径正确 -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/admin.css"> <!-- 注意这个路径 -->
+
+<!-- 添加Font Awesome图标 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 /* 后台全局样式 */
 .admin-page {
     margin: 0;
@@ -503,4 +509,50 @@
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 移动端侧边栏切换 */
+.admin-sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    background: var(--admin-primary);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 992px) {
+    .admin-sidebar-toggle {
+        display: flex;
+    }
+    
+    .admin-sidebar {
+        position: fixed;
+        left: -280px;
+        transition: left 0.3s ease;
+        z-index: 999;
+        height: 100vh;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+    
+    .admin-sidebar.active {
+        left: 0;
+    }
+    
+    .admin-main {
+        padding-left: 0;
+    }
+    
+    .admin-container {
+        padding-left: 0;
+    }
 }
