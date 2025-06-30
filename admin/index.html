@@ -1,1 +1,316 @@
- 
+ <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仪表盘 | Galgame管理后台</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 后台首页专用样式 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #8a4fff;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .stat-title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+        
+        .recent-posts {
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .post-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .post-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .post-item:last-child {
+            border-bottom: none;
+        }
+        
+        .post-thumb {
+            width: 80px;
+            height: 100px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .post-info {
+            flex-grow: 1;
+        }
+        
+        .post-info h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .post-meta {
+            display: flex;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .post-meta span {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-meta .icon {
+            margin-right: 5px;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .post-actions .btn {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body class="admin-page">
+    <!-- 全屏背景 -->
+    <div class="admin-bg" style="background-image: url('../images/admin-bg.jpg')"></div>
+    
+    <!-- 毛玻璃遮罩 -->
+    <div class="admin-overlay"></div>
+    
+    <div class="admin-container">
+        <!-- 侧边导航 -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <img src="../images/logo-icon.png" alt="Logo">
+                <span>Galgame日记</span>
+            </div>
+            
+            <nav class="admin-nav">
+                <ul>
+                    <li class="active">
+                        <a href="index.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>仪表盘</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="new-post.html">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>新建记录</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-list"></i>
+                            <span>文章管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-image"></i>
+                            <span>媒体库</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>系统设置</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="admin-footer">
+                <a href="../index.html" class="back-to-site">
+                    <i class="fas fa-home"></i>
+                    返回网站
+                </a>
+                <div class="user-info">
+                    <img src="../images/avatar.jpg" alt="用户头像">
+                    <span>管理员</span>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>
+                    <i class="fas fa-tachometer-alt"></i>
+                    仪表盘
+                </h1>
+                
+                <div class="admin-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-sync-alt"></i>
+                        刷新
+                    </button>
+                </div>
+            </header>
+            
+            <div class="admin-content">
+                <!-- 统计卡片 -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-number">18</div>
+                        <div class="stat-title">总游戏记录</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-number">5</div>
+                        <div class="stat-title">本月新增</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-title">平均评分</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="stat-number">24</div>
+                        <div class="stat-title">标签总数</div>
+                    </div>
+                </div>
+                
+                <!-- 最近游戏记录 -->
+                <div class="recent-posts">
+                    <h2><i class="fas fa-history"></i> 最近更新的游戏记录</h2>
+                    
+                    <ul class="post-list">
+                        <li class="post-item">
+                            <div class="post-thumb" style="background-image: url('../images/post1-thumb.jpg')"></div>
+                            <div class="post-info">
+                                <h3>CLANNAD - 家族的意义</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 2025-06-20</span>
+                                    <span><i class="fas fa-star"></i> ★★★★★</span>
+                                    <span><i class="fas fa-eye"></i> 128 浏览</span>
+                                </div>
+                                <p>小镇与家族的物语，Key社的巅峰之作，让我重新思考亲情与责任...</p>
+                            </div>
+                            <div class="post-actions">
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-edit"></i>
+                                    编辑
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                        
+                        <li class="post-item">
+                            <div class="post-thumb" style="background-image: url('../images/post2-thumb.jpg')"></div>
+                            <div class="post-info">
+                                <h3>白色相簿2 - 无法传达的爱恋</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 2025-06-15</span>
+                                    <span><i class="fas fa-star"></i> ★★★★☆</span>
+                                    <span><i class="fas fa-eye"></i> 96 浏览</span>
+                                </div>
+                                <p>三角恋的极致描写，冬马与雪菜的选择困境，至今仍在思考...</p>
+                            </div>
+                            <div class="post-actions">
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-edit"></i>
+                                    编辑
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                        
+                        <li class="post-item">
+                            <div class="post-thumb" style="background-image: url('../images/post3-thumb.jpg')"></div>
+                            <div class="post-info">
+                                <h3>命运石之门 - 时间旅行的代价</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 2025-06-10</span>
+                                    <span><i class="fas fa-star"></i> ★★★★★</span>
+                                    <span><i class="fas fa-eye"></i> 156 浏览</span>
+                                </div>
+                                <p>时间跳跃与平行世界的科学幻想，真由理的命运能否改变...</p>
+                            </div>
+                            <div class="post-actions">
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-edit"></i>
+                                    编辑
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/admin.js"></script>
+</body>
+</html>
